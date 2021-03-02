@@ -22,5 +22,10 @@ def get_xlsx_data():
     return data
 
 
-if __name__ == '__main__':
+def main():
     sql_save_select.save_data_sql(get_xlsx_data())
+    print('Finally import')
+
+
+if __name__ == '__main__':
+    main()

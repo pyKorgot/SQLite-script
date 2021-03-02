@@ -35,5 +35,10 @@ def save_xlsx_data(data):
     wb.save(xlsx_name)
 
 
-if __name__ == '__main__':
+def main():
     save_xlsx_data(sql_save_select.get_sql_data())
+    print('Finally export')
+
+
+if __name__ == '__main__':
+    main()

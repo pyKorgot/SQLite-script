@@ -17,16 +17,20 @@ def create_database():
     и передает подключение для заполнения"""
     if not path.exists(name_database):
         try:
-            con = sqlite3.connect('resume.db')
+            con = sqlite3.connect(name_database)
             insert_database(con.cursor())
             con.close()
-            print('Connection is established.')
+            message = 'Connection is established.'
+            print(message)
+            return message
 
         except Error:
             print(Error)
 
     else:
-        print('Database already exists')
+        message = 'Database already exists'
+        print(message)
+        return message
 
 
 if __name__ == '__main__':

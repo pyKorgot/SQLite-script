@@ -31,5 +31,10 @@ def createPDF(dates):
     canvas.save()
 
 
-if __name__ == '__main__':
+def main():
     createPDF(sql_save_select.get_sql_data())
+    print('Finally export')
+
+
+if __name__ == '__main__':
+    main()

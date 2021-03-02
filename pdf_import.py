@@ -48,5 +48,11 @@ def get_text():
     return list_users
 
 
+def main():
+    text = format_list(get_text())
+    sql_save_select.save_data_sql(text)
+    print('Finally import')
+
+
 if __name__ == '__main__':
-    sql_save_select.save_data_sql(format_list(get_text()))
+    main()
