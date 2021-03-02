@@ -3,6 +3,23 @@ import sqlite3
 name_database = 'resume.db'
 
 
+def format_data(data, cursor):
+    """Привязывает строковое представление для импорта в виде INT ключа"""
+    cursor.execute('SELECT * FROM regions;')
+    regions = cursor.fetchall()
+    for region in regions:
+        if data[4] == region[1]:
+            data[4] = region[0]
+
+    cursor.execute('SELECT * FROM cities;')
+    cities = cursor.fetchall()
+    for citie in cities:
+        if data[5] == citie[2]:
+            data[5] = citie[0]
+
+    return data
+
+
 def get_id_users(cursor):
     """Создает заголовок листа excel"""
     cursor.execute('SELECT id FROM users;')
@@ -16,8 +33,12 @@ def save_data_sql(data):
     cursor = connection.cursor()
 
     base_id = get_id_users(cursor)
+    format_data(data, cursor)
 
     for user in data:
+        if isinstance(user[4], str) or isinstance(user[5], str):
+            data = format_data(user, cursor)
+
         wrong = False
         for user_id in base_id:
             if user[0] == user_id[0]:
