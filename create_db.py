@@ -1,6 +1,8 @@
-from os import path
 import sqlite3
+from os import path
 from sqlite3 import Error
+
+name_database = 'resume.db'
 
 
 def insert_database(cursor):
@@ -13,7 +15,7 @@ def insert_database(cursor):
 def create_database():
     """Создает Базу данных если ее нет в папке,
     и передает подключение для заполнения"""
-    if not path.exists('resume.db'):
+    if not path.exists(name_database):
         try:
             con = sqlite3.connect('resume.db')
             insert_database(con.cursor())

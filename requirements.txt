@@ -1,11 +1,10 @@
-flake8==3.8.4
-mccabe==0.6.1
-pycodestyle==2.6.0
-pyflakes==2.2.0
 et-xmlfile==1.0.1
 flake8==3.8.4
 jdcal==1.4.1
 mccabe==0.6.1
 openpyxl==3.0.6
+Pillow==8.1.0
 pycodestyle==2.6.0
 pyflakes==2.2.0
+PyMuPDF==1.18.9
+reportlab==3.5.59

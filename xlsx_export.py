@@ -1,21 +1,12 @@
-import sqlite3
 from openpyxl import Workbook
 
+import sql_save_select
 
-def get_sql_data():
-    """Получает данные из таблицы users и возвращает их"""
-    connect = sqlite3.connect('resume.db')
-    cursor = connect.cursor()
-
-    cursor.execute('SELECT * FROM users;')
-    data = cursor.fetchall()
-
-    cursor.close()
-
-    return data
+xlsx_name = './media/resume_export.xlsx'
 
 
 def create_header(ws):
+    """Создание шапки таблицы, бесполезно, но красиво"""
     headers = ['id', 'second_name', 'first_name', 'patronymic', 'region',
                'city', 'phone', 'email']
     i = 0
@@ -41,7 +32,8 @@ def save_xlsx_data(data):
             val.value = user[i]
             i += 1
 
-    wb.save('resume_export.xlsx')
+    wb.save(xlsx_name)
 
 
-save_xlsx_data(get_sql_data())
+if __name__ == '__main__':
+    save_xlsx_data(sql_save_select.get_sql_data())

@@ -1,31 +1,22 @@
-from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-import sqlite3
+from reportlab.pdfgen.canvas import Canvas
 
+import sql_save_select
 
-def get_sql_data():
-    """Получает данные из таблицы users и возвращает их"""
-    connect = sqlite3.connect('resume.db')
-    cursor = connect.cursor()
-
-    cursor.execute('SELECT * FROM users;')
-    data = cursor.fetchall()
-
-    cursor.close()
-
-    return data
+pdf_name = './media/resume_export.pdf'
 
 
 def createPDF(dates):
-    canvas = Canvas('Test.pdf', pagesize=A4)
+    """Создание ПДФ файла на основе полученной информации из бд"""
+    canvas = Canvas(pdf_name, pagesize=A4)
     for data in dates:
 
         pdfmetrics.registerFont(TTFont('FreeSans', 'FreeSans.ttf'))
         canvas.setFont('FreeSans', 50)
 
-        canvas.drawString(72, 800, f'Resume User №{data[0]}')
+        canvas.drawString(72, 800, f'Resume User: №{data[0]}')
 
         canvas.setFont('FreeSans', 18)
 
@@ -40,4 +31,5 @@ def createPDF(dates):
     canvas.save()
 
 
-createPDF(get_sql_data())
+if __name__ == '__main__':
+    createPDF(sql_save_select.get_sql_data())
